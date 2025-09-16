@@ -6,7 +6,7 @@ sudo yum install docker -y
 sudo service docker start
 
 # Enable Docker to start on boot
-sudo chkconfig docker on
+sudo systemctl enable docker
 
 # Clone Streamlit app repository
 git clone https://github.com/shirsneh/insurance_rag_chatbot.git

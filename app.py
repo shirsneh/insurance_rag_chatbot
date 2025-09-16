@@ -111,7 +111,7 @@ if prompt_:
     # Display user message in chat message container
     st.session_state.chat_history.append(HumanMessage(content=prompt_))
     st.session_state.awaiting_response = True
-    st.experimental_rerun()
+    st.rerun()
 
 
     # Check if policy ID is validated or not
@@ -132,4 +132,4 @@ if prompt_:
     # Add the response to chat history
     st.session_state.chat_history.append(AIMessage(content=response))
     st.session_state.awaiting_response = False
-    st.experimental_rerun()
+    st.rerun()
