@@ -6,7 +6,7 @@ sudo yum install docker -y
 sudo service docker start
 
 # Enable Docker to start on boot
-sudo chkconfig docker on
+sudo systemctl enable docker
 
 # Clone Streamlit app repository
 git clone https://github.com/shirsneh/insurance_rag_chatbot.git
@@ -18,4 +18,4 @@ sudo docker build -t chatApp .
 # Run Docker container
 sudo docker run -d -p 8501:8501 chatApp
 
-echo "Your VIA chatbot is live! Visit: http://$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4):8501"
+echo "Chatbot application is now running on port 8501"
