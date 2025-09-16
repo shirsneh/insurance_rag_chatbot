@@ -1,0 +1,9 @@
+langchain==0.1.45
+langchain-aws==0.1.6
+langchain-community==0.0.162
+langchain-core==0.13.1
+langchain-text-splitters==0.0.1
+streamlit==1.33.1
+streamlit-chat==0.1.4
+boto3==1.34.122
+faiss-cpu==1.8.0
