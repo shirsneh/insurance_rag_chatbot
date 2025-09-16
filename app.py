@@ -81,8 +81,7 @@ if "chat_history" not in st.session_state:
         AIMessage(content="Hi! I'm VIA, your Virtual Insurance Assistant"),
     ]
     time.sleep(2)
-    st.session_state.chat_history.append(AIMessage(content="Please enter your policy number to get started"))
-    st.session_state.policy_id_validated = False
+    st.session_state.chat_history.append(AIMessage(content="How can I help you today?"))
 
 # Display chat messages using Streamlit's chat_message
 for message in st.session_state.chat_history:
@@ -93,19 +92,13 @@ for message in st.session_state.chat_history:
         with st.chat_message("assistant"):
             st.write(message.content)
 
-# Method to validate the policy
-def validate_policy_id(policy_id):
-    return bool(re.match(r'^AU\d{4}$', policy_id))
 
 # Handle user input
 if "awaiting_response" not in st.session_state:
     st.session_state.awaiting_response = False
 
-# Handle user input based on policy validation
-if not st.session_state.policy_id_validated:
-    prompt_ = st.chat_input("Enter your policy number:")
-else:
-    prompt_ = st.chat_input("How can I help you?")
+# Handle user input
+prompt_ = st.chat_input("How can I help you?")
 
 if prompt_:
     # Display user message in chat message container
@@ -114,20 +107,8 @@ if prompt_:
     st.rerun()
 
 
-    # Check if policy ID is validated or not
     user_input = st.session_state.chat_history[-1].content
-    if not st.session_state.policy_id_validated:
-        if validate_policy_id(user_input):
-            download_vectors(user_input)
-            # Load FAISS index and setup chain after vectors are downloaded
-            st.session_state.chain = load_faiss_index()
-            response = "Policy number validated successfully. How can I help you today?"
-            st.session_state.policy_id_validated = True
-        else:
-            response = "Incorrect policy number. Please enter a valid policy"
-    else:
-        # Get response from chain
-        response = get_streamed_response(user_input, st.session_state.chain)
+    response = get_streamed_response(user_input, st.session_state.chain)
 
     # Add the response to chat history
     st.session_state.chat_history.append(AIMessage(content=response))
