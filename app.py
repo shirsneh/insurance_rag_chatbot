@@ -25,7 +25,7 @@ template = """Use the following context documents to answer the question at the 
 Question: {input}
 Helpful Answer:"""
 
-BUCKET_NAME = "rag-bot-source"
+BUCKET_NAME = "insuranceragchatbot"
 file_path = f"/tmp"
 
 # Initialize AWS connectors
